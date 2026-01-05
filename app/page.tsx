@@ -77,11 +77,11 @@ export default async function Home() {
             </a>
           ))}
         </div>
-        <p className="mt-6 text-lg font-semibold tracking-[0.3em] text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.75)] md:text-xl">
+        <p className="mt-4 text-lg font-semibold tracking-[0.3em] text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.75)] md:text-xl">
           网站建设中，敬请期待
         </p>
         <p
-          className={`${notoSans.className} mt-4 max-w-3xl text-sm font-medium leading-relaxed text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] md:text-base`}
+          className={`${notoSans.className} mt-3 max-w-3xl text-sm font-medium leading-relaxed text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] md:text-base`}
         >
           小小（Xiaoxiao）是近期在全球范围内爆火的海狮 meme，短时间内在全网斩获数十亿次播放。
           凭借它魔性的动作和极具辨识度的声音，小小迅速席卷各大社交平台，成为海洋系 meme 的现象级代表。
@@ -98,9 +98,9 @@ export default async function Home() {
           </a>
         </div>
 
-        <section className="mt-8 w-full">
+        <section className="mt-4 w-full">
           <div className="mx-auto w-full max-w-4xl rounded-3xl p-5">
-            <div className="relative h-[320px] w-full overflow-hidden rounded-3xl bg-transparent shadow-[0_28px_60px_rgba(2,12,22,0.65),0_10px_24px_rgba(10,30,60,0.35)] md:h-[460px]">
+            <div className="relative h-[460px] w-full overflow-hidden rounded-3xl bg-transparent shadow-[0_28px_60px_rgba(2,12,22,0.65),0_10px_24px_rgba(10,30,60,0.35)] md:h-[680px]">
               <video
                 className="h-full w-full rounded-3xl object-cover"
                 src="https://cdn.xiaoxiaobsc.xyz/xiaoxiao.mp4"
