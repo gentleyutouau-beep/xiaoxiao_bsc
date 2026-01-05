@@ -11,9 +11,24 @@ body {
 }
 
 .ocean-stage {
+  position: relative;
   background-image: url("/images/background.png");
   background-size: cover;
   background-position: center;
+}
+
+.ocean-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 20, 35, 0.45);
+  backdrop-filter: blur(6px);
+  z-index: 0;
+}
+
+.ocean-stage > * {
+  position: relative;
+  z-index: 1;
 }
 
 .bubble {

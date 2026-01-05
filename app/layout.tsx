@@ -8,7 +8,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Xiaoxiao – Sea Lion Meme Coin",
+  title: "小小-全网最火的网红海狮",
   description: "Xiaoxiao meme coin landing page."
 };
 

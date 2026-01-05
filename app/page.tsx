@@ -37,12 +37,27 @@ const socials = [
   }
 ];
 
-export default function Home() {
-  return null;
+async function getGalleryImages() {
+  const galleryDir = path.join(process.cwd(), "public", "gallery");
+  const allowed = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]);
+
+  try {
+    const files = await fs.readdir(galleryDir);
+    return files
+      .filter((file) => allowed.has(path.extname(file).toLowerCase()))
+      .map((file) => `/gallery/${file}`);
+  } catch {
+    return [];
+  }
 }
+
+export default async function Home() {
+  const galleryImages = await getGalleryImages();
+  const marqueeImages = [...galleryImages, ...galleryImages];
+
   return (
     <main className="ocean-stage min-h-screen overflow-hidden">
-      <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col items-center px-6 pb-20 pt-16 text-center md:px-10">
+      <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col items-center px-6 pb-16 pt-10 text-center md:px-10 md:pt-12">
         <div className="pointer-events-none absolute left-6 top-10 h-20 w-20 animate-floaty rounded-full bubble opacity-70 blur-[1px] md:left-20 md:top-20 md:h-28 md:w-28" />
         <div className="pointer-events-none absolute right-8 top-24 h-12 w-12 animate-floaty rounded-full bubble opacity-60 md:right-24 md:top-28 md:h-16 md:w-16" />
         <div className="pointer-events-none absolute bottom-16 left-10 hidden h-24 w-24 animate-floaty rounded-full bubble opacity-60 md:block" />
@@ -62,11 +77,11 @@ export default function Home() {
             </a>
           ))}
         </div>
-        <p className="mt-10 text-xl tracking-[0.35em] text-white drop-shadow-[0_3px_8px_rgba(0,0,0,0.7)] md:text-2xl">
+        <p className="mt-6 text-lg font-semibold tracking-[0.3em] text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.75)] md:text-xl">
           网站建设中，敬请期待
         </p>
         <p
-          className={`${notoSans.className} mt-6 max-w-3xl text-base leading-relaxed text-white/95 drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)] md:text-lg`}
+          className={`${notoSans.className} mt-4 max-w-3xl text-sm font-medium leading-relaxed text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] md:text-base`}
         >
           小小（Xiaoxiao）是近期在全球范围内爆火的海狮 meme，短时间内在全网斩获数十亿次播放。
           凭借它魔性的动作和极具辨识度的声音，小小迅速席卷各大社交平台，成为海洋系 meme 的现象级代表。
@@ -83,9 +98,9 @@ export default function Home() {
           </a>
         </div>
 
-        <section className="mt-14 w-full">
+        <section className="mt-8 w-full">
           <div className="mx-auto w-full max-w-4xl rounded-3xl p-5">
-            <div className="relative h-[390px] w-full overflow-hidden rounded-3xl bg-transparent shadow-[0_28px_60px_rgba(2,12,22,0.65),0_10px_24px_rgba(10,30,60,0.35)] md:h-[540px]">
+            <div className="relative h-[320px] w-full overflow-hidden rounded-3xl bg-transparent shadow-[0_28px_60px_rgba(2,12,22,0.65),0_10px_24px_rgba(10,30,60,0.35)] md:h-[460px]">
               <video
                 className="h-full w-full rounded-3xl object-cover"
                 src="https://cdn.xiaoxiaobsc.xyz/xiaoxiao.mp4"
@@ -99,7 +114,35 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="mt-16 flex flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-cyan-100/80 md:flex-row">
+        <section className="mt-4 w-full">
+          {galleryImages.length > 0 ? (
+            <div className="marquee-shell mx-auto w-full max-w-5xl rounded-[28px] px-5 py-4">
+              <div className="marquee-fade overflow-hidden">
+                <div className="marquee-track flex items-center gap-4">
+                  {marqueeImages.map((src, index) => (
+                    <div
+                      key={`${src}-${index}`}
+                      className="rounded-[22px] border border-cyan-200/20 bg-white/5 p-2 shadow-[0_12px_26px_rgba(2,12,22,0.45)]"
+                    >
+                      <img
+                        src={src}
+                        alt="Xiaoxiao gallery"
+                        className="h-28 w-44 rounded-[18px] object-cover md:h-32 md:w-52"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-4 text-xs uppercase tracking-[0.3em] text-white/70">
+              把图片放到 public/gallery/ 文件夹中即可自动滚动
+            </p>
+          )}
+        </section>
+
+        <div className="mt-10 flex flex-col items-center gap-3 text-xs uppercase tracking-[0.3em] text-cyan-100/80 md:flex-row">
           <span className="h-[2px] w-16 bg-gradient-to-r from-transparent via-cyan-100 to-transparent" />
           <span>Deep Sea Mood</span>
           <span className="h-[2px] w-16 bg-gradient-to-r from-transparent via-cyan-100 to-transparent" />
