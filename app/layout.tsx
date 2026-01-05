@@ -9,7 +9,10 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "小小-全网最火的网红海狮",
-  description: "Xiaoxiao meme coin landing page."
+  description: "Xiaoxiao meme coin landing page.",
+  icons: {
+    icon: "/xiaoxiao.svg"
+  }
 };
 
 export default function RootLayout({
